@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useState, useRef } from 'react';
 //
 export default function Player() {
