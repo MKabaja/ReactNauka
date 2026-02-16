@@ -3,3 +3,7 @@
 @theme {
 	--font-main: 'DM Sans', sans-serif;
 }
+html,
+body {
+	overflow-y: hidden;
+}
