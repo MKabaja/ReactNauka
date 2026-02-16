@@ -1,6 +1,7 @@
-import Project from './components/Project';
+import { NewProject } from './components/NewProjects';
+import NoSelected from './components/NoSelected';
 import Sidebar from './components/Sidebar';
-import Modal from './components/Modal';
+
 import { useRef } from 'react';
 
 function App() {
@@ -14,8 +15,8 @@ function App() {
 		<>
 			<main className='flex pt-6 h-screen my-8 gap-8 bg-stone-50'>
 				<Sidebar onAddProject={handleOpenModal} />
-				<Project />
-				<Modal ref={modalRef} />
+				{/* <NoSelected /> */}
+				<NewProject />
 			</main>
 		</>
 	);
