@@ -7,3 +7,7 @@ html,
 body {
 	overflow-y: hidden;
 }
+
+@utility heading {
+	@apply font-bold text-stone-800  font-main text-2xl;
+}

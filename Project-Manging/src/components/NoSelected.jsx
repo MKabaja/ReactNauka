@@ -1,6 +1,6 @@
 import img from '../assets/no-projects.png';
 import Button from './Button.jsx';
-export default function Project() {
+export default function Project({ onOpenOverlay }) {
 	return (
 		<section className=' flex flex-col mx-auto justify-center items-center space-y-4'>
 			<img
@@ -17,6 +17,7 @@ export default function Project() {
 			<Button
 				text='Stwórz nowy Projekt'
 				variant='secondary'
+				onClick={onOpenOverlay}
 			></Button>
 		</section>
 	);
