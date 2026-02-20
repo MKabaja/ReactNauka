@@ -4,8 +4,8 @@ import { use } from 'react';
 
 // use - używamy w wersji reacta 19+, można go używac w blokach if.
 // useContext - Używamy w wersjach Reacta  mniejsz niz 19, nie mozna ich używac w blokach if
-export default function Cart({ onUpdateItemQuantity }) {
-	const { items } = useContext(CartContext);
+export default function Cart() {
+	const { items, updateItemQuantity } = useContext(CartContext);
 
 	const totalPrice = items.reduce(
 		(acc, item) => acc + item.price * item.quantity,
@@ -30,7 +30,7 @@ export default function Cart({ onUpdateItemQuantity }) {
 								<div className='cart-item-actions'>
 									<button
 										onClick={() =>
-											onUpdateItemQuantity(item.id, -1)
+											updateItemQuantity(item.id, -1)
 										}
 									>
 										-
@@ -38,7 +38,7 @@ export default function Cart({ onUpdateItemQuantity }) {
 									<span>{item.quantity}</span>
 									<button
 										onClick={() =>
-											onUpdateItemQuantity(item.id, 1)
+											updateItemQuantity(item.id, 1)
 										}
 									>
 										+
