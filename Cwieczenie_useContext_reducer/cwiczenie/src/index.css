@@ -1,0 +1,96 @@
+/* Podstawowe resetowanie */
+body {
+	margin: 0;
+	font-family: sans-serif;
+	background-color: #f4f7f6;
+	color: #333;
+}
+
+/* Header / Navbar */
+header {
+	background-color: #2c3e50;
+	color: white;
+	padding: 1rem 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+	margin: 0;
+	font-size: 1.5rem;
+}
+
+/* Licznik powiadomień w Navbarze */
+header span#notif-badge {
+	background: #e74c3c;
+	border-radius: 50%;
+	padding: 0.2rem 0.6rem;
+	font-size: 0.8rem;
+	margin-left: 0.5rem;
+}
+
+/* Główny kontener */
+main {
+	max-width: 600px;
+	margin: 2rem auto;
+	padding: 1rem;
+}
+
+/* Sekcja przycisków (Controls) */
+section#controls {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 2rem;
+	justify-content: center;
+}
+#controls button:disabled {
+	background-color: gray;
+	color: lightgray;
+	cursor: not-allowed; /* Zmienia kursor na "zakaz" */
+	opacity: 0.6;
+}
+
+button {
+	padding: 0.6rem 1rem;
+	cursor: pointer;
+	border: none;
+	border-radius: 4px;
+	background-color: #3498db;
+	color: white;
+	transition: background 0.2s;
+}
+
+button:hover {
+	background-color: #2980b9;
+}
+
+/* Przycisk usuwania (specyficzny) */
+button.delete-btn {
+	background-color: #95a5a6;
+	padding: 0.2rem 0.5rem;
+	font-size: 0.7rem;
+}
+
+button.delete-btn:hover {
+	background-color: #c0392b;
+}
+
+/* Lista powiadomień */
+ul#notif-list {
+	list-style: none;
+	padding: 0;
+}
+
+ul#notif-list li {
+	background: white;
+	margin-bottom: 0.5rem;
+	padding: 1rem;
+	border-radius: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	border-left: 5px solid #3498db;
+}
