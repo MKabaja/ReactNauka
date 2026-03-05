@@ -6,16 +6,21 @@ import { type Mode } from './QuestionTimer.tsx';
 
 type QuestionProps = {
 	index: number;
-	onSelectAnswer: (answer: string) => void;
+	onSelectAnswer: (answer: SelectedPayload | null) => void;
 	onSkipAnswer: () => void;
 };
-type Answer = {
+
+export type SelectedAnswerState = {
 	selectedAnswer: string;
 	isCorrect: boolean | null;
 };
+export type SelectedPayload = {
+	userAnswer: string;
+	isAnswerCorrect: boolean;
+};
 
 function Question({ index, onSelectAnswer, onSkipAnswer }: QuestionProps) {
-	const [answer, setAnswer] = useState<Answer>({
+	const [answer, setAnswer] = useState<SelectedAnswerState>({
 		selectedAnswer: '',
 		isCorrect: null,
 	});
@@ -28,19 +33,22 @@ function Question({ index, onSelectAnswer, onSkipAnswer }: QuestionProps) {
 		timer = 2000;
 	}
 
-	function handleSelectAnswer(answer: string) {
+	function handleSelectAnswer(selected: SelectedPayload) {
 		setAnswer({
-			selectedAnswer: answer,
+			selectedAnswer: selected.userAnswer,
 			isCorrect: null,
 		});
 
 		setTimeout(() => {
 			setAnswer({
-				selectedAnswer: answer,
-				isCorrect: quizData[index].answers[0] === answer,
+				selectedAnswer: selected.userAnswer,
+				isCorrect: selected.isAnswerCorrect,
 			});
 			setTimeout(() => {
-				onSelectAnswer(answer);
+				onSelectAnswer({
+					userAnswer: selected.userAnswer,
+					isAnswerCorrect: selected.isAnswerCorrect,
+				});
 			}, 2000);
 		}, 1000);
 	}
@@ -68,7 +76,6 @@ function Question({ index, onSelectAnswer, onSkipAnswer }: QuestionProps) {
 				selectedAnswer={answer.selectedAnswer}
 				answerState={answerState}
 				onSelect={handleSelectAnswer}
-				id={quizData[index].id}
 			/>
 		</div>
 	);

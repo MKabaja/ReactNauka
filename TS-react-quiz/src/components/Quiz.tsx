@@ -2,8 +2,9 @@ import { useState, useCallback } from 'react';
 import quizData from '../questions.ts';
 import Summary from './Summary.tsx';
 import Question from './Questions.tsx';
+import { type SelectedPayload } from './Questions.tsx';
 
-export type SelectedAnswer = string | null;
+export type SelectedAnswer = SelectedPayload | null;
 
 function Quiz() {
 	const [answers, setAnswers] = useState<SelectedAnswer[]>([]);

@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { type QuizAnswer } from '../questions';
+import { type SelectedPayload } from './Questions';
+import { type Mode } from './QuestionTimer';
 type AnswersProps = {
-	answers: string[];
+	answers: QuizAnswer[];
 	selectedAnswer: string | null;
-	answerState: string | null;
-	id: string;
-	onSelect: (answerText: string) => void;
+	answerState: Mode;
+
+	onSelect: (payload: SelectedPayload) => void;
 };
 
 function Answers({
@@ -12,19 +14,11 @@ function Answers({
 	selectedAnswer,
 	answerState,
 	onSelect,
-	id,
 }: AnswersProps) {
-	const [shuffledAnswers, setSchuffledAnswers] = useState<string[]>([]);
-	useEffect(() => {
-		const copiedAnswers = [...answers];
-		copiedAnswers.sort(() => Math.random() - 0.5);
-		setSchuffledAnswers(copiedAnswers);
-	}, [id, answers]);
-
 	return (
 		<ul id='answers'>
-			{shuffledAnswers.map((answer) => {
-				const isSelected = selectedAnswer === answer;
+			{answers.map((answer) => {
+				const isSelected = selectedAnswer === answer.answer;
 				let cssClass = '';
 				if (answerState === 'answered' && isSelected) {
 					cssClass = 'selected';
@@ -38,15 +32,20 @@ function Answers({
 
 				return (
 					<li
-						key={answer}
+						key={answer.answer}
 						className='answer'
 					>
 						<button
-							onClick={() => onSelect(answer)}
+							onClick={() =>
+								onSelect({
+									userAnswer: answer.answer,
+									isAnswerCorrect: answer.isCorrect,
+								})
+							}
 							className={cssClass}
 							disabled={answerState !== ''}
 						>
-							{answer}
+							{answer.answer}
 						</button>
 					</li>
 				);

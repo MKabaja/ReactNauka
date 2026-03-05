@@ -8,7 +8,7 @@ type SummaryProps = {
 function Summary({ answers }: SummaryProps) {
 	const skippedAnswers = answers.filter((answer) => answer === null);
 	const correctAnswers = answers.filter(
-		(answer, index) => answer === quizData[index].answers[0],
+		(answer) => answer?.isAnswerCorrect === true,
 	);
 	const skippedAnswersShare = Math.round(
 		(skippedAnswers.length / answers.length) * 100,
@@ -46,7 +46,7 @@ function Summary({ answers }: SummaryProps) {
 
 					if (answer === null) {
 						cssClass += ' skipped';
-					} else if (answer === quizData[index].answers[0]) {
+					} else if (answer.isAnswerCorrect) {
 						cssClass += ' correct';
 					} else {
 						cssClass += ' wrong';
@@ -55,7 +55,9 @@ function Summary({ answers }: SummaryProps) {
 						<li key={index}>
 							<h3>{index + 1}</h3>
 							<p className='question'>{quizData[index].text}</p>
-							<p className={cssClass}>{answer ?? 'skipped'}</p>
+							<p className={cssClass}>
+								{answer?.userAnswer ?? 'skipped'}
+							</p>
 						</li>
 					);
 				})}
