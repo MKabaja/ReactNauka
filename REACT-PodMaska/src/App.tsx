@@ -12,6 +12,7 @@ function App() {
 
 	function handleSetCount(newCount: number) {
 		setChosenCount(newCount);
+		setChosenCount((prevChosenCount) => prevChosenCount + 1);
 	}
 
 	return (
@@ -19,8 +20,20 @@ function App() {
 			<Header />
 			<main>
 				<ConfigureCounter onSetCount={handleSetCount} />
+				{/* użycie key na elemencie Counter powoduje,
+				że React traktuje go jako zupełnie nowy komponent za każdym razem,
+				gdy wartość initialCount się zmienia.
+				Dzięki temu stan wewnętrzny Counter jest resetowany do wartości początkowej,
+				co jest dokładnie tym, czego chcemy w tym przypadku.
+				To podejście jest bardziej efektywne niż używanie useEffect do resetowania stanu,
+				ponieważ unika dodatkowego renderowania komponentu po zmianie initialCount.
+				 */}
 
-				<Counter initialCount={chosenCount} />
+				<Counter
+					key={chosenCount}
+					initialCount={chosenCount}
+				/>
+				<Counter initialCount={0} />
 			</main>
 		</>
 	);
