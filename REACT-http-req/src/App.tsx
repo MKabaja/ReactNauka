@@ -5,15 +5,16 @@ import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces';
+import { type Place } from './types/Places';
 
 function App() {
-	const selectedPlace = useRef();
+	const selectedPlace = useRef<Place | null>(null);
 
-	const [userPlaces, setUserPlaces] = useState([]);
+	const [userPlaces, setUserPlaces] = useState<(Place | null)[]>([]);
 
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
-	function handleStartRemovePlace(place) {
+	function handleStartRemovePlace(place: Place) {
 		setModalIsOpen(true);
 		selectedPlace.current = place;
 	}
@@ -22,13 +23,13 @@ function App() {
 		setModalIsOpen(false);
 	}
 
-	function handleSelectPlace(selectedPlace) {
+	function handleSelectPlace(selectedPlace: Place) {
 		setUserPlaces((prevPickedPlaces) => {
 			if (!prevPickedPlaces) {
 				prevPickedPlaces = [];
 			}
 			if (
-				prevPickedPlaces.some((place) => place.id === selectedPlace.id)
+				prevPickedPlaces.some((place) => place?.id === selectedPlace.id)
 			) {
 				return prevPickedPlaces;
 			}
@@ -39,7 +40,7 @@ function App() {
 	const handleRemovePlace = useCallback(async function handleRemovePlace() {
 		setUserPlaces((prevPickedPlaces) =>
 			prevPickedPlaces.filter(
-				(place) => place.id !== selectedPlace.current.id,
+				(place) => place?.id !== selectedPlace.current?.id,
 			),
 		);
 

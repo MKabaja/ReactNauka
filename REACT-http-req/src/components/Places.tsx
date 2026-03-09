@@ -1,8 +1,8 @@
-import { type Place } from './AvailablePlaces';
+import { type Place } from '../types/Places';
 
 type PlacesProps = {
 	title: string;
-	places: Place[] | null[];
+	places: (Place | null)[];
 	fallbackText: string;
 	onSelectPlace: (place: Place) => void;
 	isLoading: boolean;
