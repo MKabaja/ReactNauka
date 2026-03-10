@@ -1,6 +1,6 @@
 type ErrorProps = {
 	title: string;
-	message: string;
+	message: string | undefined;
 	onConfirm?: () => void;
 };
 export default function Issue({ title, message, onConfirm }: ErrorProps) {

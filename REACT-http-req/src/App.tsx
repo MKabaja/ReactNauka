@@ -6,11 +6,23 @@ import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces';
 import { type Place } from './types/Places';
+import { updateUserPlaces } from './http.js';
+import Issue from './components/Error.js';
+
+const URL: string = 'http://localhost:3000/user-places';
+
+type ErrorUpdatingState =
+	| {
+			message: string;
+	  }
+	| string;
 
 function App() {
 	const selectedPlace = useRef<Place | null>(null);
 
-	const [userPlaces, setUserPlaces] = useState<(Place | null)[]>([]);
+	const [userPlaces, setUserPlaces] = useState<Place[]>([]);
+	const [errorUpdating, setErrorUpdating] =
+		useState<ErrorUpdatingState | null>(null);
 
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -22,8 +34,10 @@ function App() {
 	function handleStopRemovePlace() {
 		setModalIsOpen(false);
 	}
-
-	function handleSelectPlace(selectedPlace: Place) {
+	// optimistic update, czyli aktualizacja UI przed potwierdzeniem z serwera,
+	// co poprawia UX, ale wymaga obsługi błędów,
+	// aby przywrócić poprzedni stan w razie niepowodzenia.
+	async function handleSelectPlace(selectedPlace: Place) {
 		setUserPlaces((prevPickedPlaces) => {
 			if (!prevPickedPlaces) {
 				prevPickedPlaces = [];
@@ -35,6 +49,18 @@ function App() {
 			}
 			return [selectedPlace, ...prevPickedPlaces];
 		});
+
+		try {
+			await updateUserPlaces(URL, [selectedPlace, ...userPlaces]);
+		} catch (error) {
+			setUserPlaces(userPlaces);
+
+			if (error instanceof Error) {
+				setErrorUpdating({
+					message: error.message || 'Unknown error occurred',
+				});
+			}
+		}
 	}
 
 	const handleRemovePlace = useCallback(async function handleRemovePlace() {
@@ -47,8 +73,29 @@ function App() {
 		setModalIsOpen(false);
 	}, []);
 
+	function handleError() {
+		setErrorUpdating(null);
+	}
+
 	return (
 		<>
+			<Modal
+				open={errorUpdating}
+				onClose={handleError}
+			>
+				{errorUpdating && (
+					<Issue
+						title='An error occured'
+						message={
+							typeof errorUpdating === 'string'
+								? errorUpdating
+								: errorUpdating?.message
+						}
+						onConfirm={handleError}
+					/>
+				)}
+			</Modal>
+
 			<Modal
 				open={modalIsOpen}
 				onClose={handleStopRemovePlace}
