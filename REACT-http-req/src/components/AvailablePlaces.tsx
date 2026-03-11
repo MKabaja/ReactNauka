@@ -11,7 +11,7 @@ type AvailablePlacesProps = {
 
 type AvailablePlacesState = (Place | null)[];
 
-type ErrorState = {
+export type ErrorState = {
 	message: string;
 };
 
