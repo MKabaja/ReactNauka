@@ -4,6 +4,10 @@ import {
 	type FocusEvent,
 	useState,
 } from 'react';
+import Input from './Input';
+import { isEmail, isNotEmpty, hasMinLength } from '../util/validation';
+import { useInput } from '../hooks/useInput';
+
 type Values = {
 	email: string;
 	password: string;
@@ -19,84 +23,55 @@ type BlurValues = {
 // Jest to popularna praktyka, bo poprawia doświadczenie użytkownika (UX) w formularzach.
 
 export default function StateLogin() {
-	// const [enteredEmail, setEnteredEmail] = useState<string>('');
-	// const [enteredPassword, setEnteredPassword] = useState<string>('');
+	const {
+		value: emailValue,
+		handleChange: handleEmailChange,
+		handleBlur: handleEmailBlur,
+		hasError: emailHasError,
+	} = useInput(
+		'',
+		// Przekazujemy tu funkcję (closure), która „zamyka” w sobie logikę walidacji:
+		// przy każdym wywołaniu hooka dostaje aktualną wartość `value`,
+		// ale sama funkcja pamięta, że ma użyć konkretnych reguł (`isEmail`, `isNotEmpty`).
+		(value) => isEmail(value) && isNotEmpty(value),
+	);
 
-	const [enteredValues, setEnteredValues] = useState<Values>({
-		email: '',
-		password: '',
-	});
-	const [blurEdit, setBlurEdit] = useState<BlurValues>({
-		email: false,
-		password: false,
-	});
-
-	const emailIsInvalid = blurEdit.email && !enteredValues.email.includes('@');
+	const {
+		value: passwordValue,
+		handleChange: handlePasswordChange,
+		handleBlur: handlePasswordBlur,
+		hasError: passwordHasError,
+	} = useInput('', (value) => hasMinLength(value, 6));
 
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		console.log('Wysłano:', enteredValues);
 	}
-	function handleBlur(e: FocusEvent<HTMLInputElement>) {
-		const { name } = e.target;
-		setBlurEdit((prevEdit) => ({
-			...prevEdit,
-			[name]: true,
-		}));
-	}
-
-	function handleChange(e: ChangeEvent<HTMLInputElement>) {
-		const { name, value } = e.target;
-		// Uwaga: używamy nawiasów okrągłych () wokół nawiasów klamrowych {}
-		// podczas zwracania obiektu w funkcji strzałkowej, aby JS nie myślał, że to blok kodu
-		setEnteredValues((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-		setBlurEdit((prevEdit) => ({
-			...prevEdit,
-			[name]: false,
-		}));
-	}
-
-	// function handleEmailChange(e: ChangeEvent<HTMLInputElement>) {
-	// 	setEnteredEmail(e.target.value);
-	// }
-
-	// function handlePasswordChange(e: ChangeEvent<HTMLInputElement>) {
-	// 	setEnteredPassword(e.target.value);
-	// }
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h2>Login</h2>
+			<h2>State Login</h2>
 
 			<div className='control-row'>
-				<div className='control no-margin'>
-					<label htmlFor='email'>Email</label>
-					<input
-						id='email'
-						type='email'
-						name='email'
-						onBlur={handleBlur}
-						onChange={handleChange}
-						value={enteredValues.email}
-					/>
-					<div className='control-error'>
-						{emailIsInvalid && <p>Sprawdz Poprawność e maila!</p>}
-					</div>
-				</div>
-
-				<div className='control no-margin'>
-					<label htmlFor='password'>Password</label>
-					<input
-						id='password'
-						type='password'
-						name='password'
-						onChange={handleChange}
-						value={enteredValues.password}
-					/>
-				</div>
+				<Input
+					label='Email'
+					id='email'
+					type='email'
+					name='email'
+					onBlur={handleEmailBlur}
+					onChange={handleEmailChange}
+					value={emailValue}
+					error={emailHasError ? 'Nieprawidłowy email' : undefined}
+				></Input>
+				<Input
+					label='Password'
+					id='password'
+					type='password'
+					name='password'
+					onBlur={handlePasswordBlur}
+					onChange={handlePasswordChange}
+					value={passwordValue}
+					error={passwordHasError ? 'Nieprawidłowe hasło' : undefined}
+				></Input>
 			</div>
 
 			<p className='form-actions'>

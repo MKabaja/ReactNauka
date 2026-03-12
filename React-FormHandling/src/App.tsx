@@ -9,7 +9,7 @@ function App() {
 			<Header />
 			<main>
 				<Signup />
-				{/* <StateLogin /> */}
+				<StateLogin />
 				<Login />
 			</main>
 		</>
