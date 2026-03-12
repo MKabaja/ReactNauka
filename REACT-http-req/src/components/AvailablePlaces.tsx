@@ -4,6 +4,7 @@ import Issue from './Error';
 import { sortPlacesByDistance } from '../loc';
 import { fetchAvailablePlaces } from '../http';
 import { type Place } from '../types/Places';
+import { useFetch } from '../hooks/useFetch';
 
 type AvailablePlacesProps = {
 	onSelectPlace: (place: Place) => void;

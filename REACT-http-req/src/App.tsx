@@ -29,6 +29,7 @@ function App() {
 	const {
 		isFetching,
 		fetchedData: userPlaces,
+		setFetchedData: setUserPlaces,
 		error,
 	} = useFetch(URL, 'Error fetching user places', fetchAvailablePlaces);
 
@@ -95,7 +96,7 @@ function App() {
 			}
 			setModalIsOpen(false);
 		},
-		[userPlaces],
+		[userPlaces, setUserPlaces],
 	);
 
 	function handleError() {

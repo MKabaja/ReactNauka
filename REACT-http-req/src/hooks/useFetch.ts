@@ -26,6 +26,6 @@ export function useFetch(URL: string, msg: string, fetchFN: FetchFunction) {
 			}
 		}
 		fetchData();
-    }, [fetchFN]);
-    return { isFetching, fetchedData, error };
+	}, [fetchFN]);
+	return { isFetching, fetchedData, error, setFetchedData };
 }
