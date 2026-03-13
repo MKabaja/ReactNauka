@@ -1,0 +1,32 @@
+﻿{
+	"compilerOptions": {
+		"target": "ESNext",
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+		/* Wsparcie dla mieszania plików JS i TS */
+		"allowJs": true, // Pozwala na importowanie plików .js i .jsx
+		"checkJs": false, // NIE sprawdzaj błędów w plikach JS (to kluczowe!)
+		"esModuleInterop": true, // Lepsza współpraca z modułami CommonJS (częste w kursach)
+
+		/* Ustawienia modułów i Vite */
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+
+		/* Ścisłość typowania (możesz poluzować, jeśli za bardzo krzyczy) */
+		"strict": true, // Zalecane, ale jeśli przepisujesz, możesz zmienić na false
+		"skipLibCheck": true, // Pomija sprawdzanie typów w node_modules (oszczędza błędy)
+		"noImplicitAny": false, // Pozwala na używanie 'any', gdy nie masz czasu na typowanie
+
+		/* Aliasy ścieżek (aby @/ działało) */
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		}
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"]
+}

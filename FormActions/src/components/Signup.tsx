@@ -6,8 +6,20 @@ import {
 	isNotEmpty,
 } from '../util/validation';
 
+type AcquisitionMethod = ('google' | 'friend' | 'other')[];
+
 type SignupFormState = {
 	errors: string[] | null;
+	enteredValues?: {
+		email: string;
+		password: string;
+		confirmPassword: string;
+		firstName: string;
+		lastName: string;
+		role: string;
+		acquisition: AcquisitionMethod;
+		terms: boolean;
+	};
 };
 type SignupActionFn = (
 	prevState: SignupFormState,
@@ -22,7 +34,7 @@ export default function Signup() {
 		const firstName = formData.get('first-name') as string;
 		const lastName = formData.get('last-name') as string;
 		const role = formData.get('role') as string;
-		const acquisition = formData.getAll('acquisition') as string[];
+		const acquisition = formData.getAll('acquisition') as AcquisitionMethod;
 		const terms = formData.get('terms') === 'on' ? true : false;
 
 		let errors: string[] = [];
@@ -49,17 +61,25 @@ export default function Signup() {
 			errors.push('Please let us know how did you find us!');
 		}
 		if (errors.length > 0) {
-			alert('Please fix the following errors:\n' + errors.join('\n'));
-			return { errors };
+			return {
+				errors,
+				enteredValues: {
+					email,
+					password,
+					confirmPassword,
+					firstName,
+					lastName,
+					role,
+					acquisition,
+					terms,
+				},
+			};
 		}
 		return { errors: null };
 	};
-	const [formState, formAction] = useActionState<SignupFormState>(
-		signupAction,
-		{
-			errors: null,
-		},
-	);
+	const [formState, formAction] = useActionState(signupAction, {
+		errors: null,
+	});
 
 	return (
 		<form action={formAction}>
@@ -74,6 +94,7 @@ export default function Signup() {
 					id='email'
 					type='email'
 					name='email'
+					defaultValue={formState.enteredValues?.email || ''}
 				/>
 			</div>
 
@@ -84,6 +105,7 @@ export default function Signup() {
 						id='password'
 						type='password'
 						name='password'
+						defaultValue={formState.enteredValues?.password || ''}
 					/>
 				</div>
 
@@ -93,6 +115,9 @@ export default function Signup() {
 						id='confirm-password'
 						type='password'
 						name='confirm-password'
+						defaultValue={
+							formState.enteredValues?.confirmPassword || ''
+						}
 					/>
 				</div>
 			</div>
@@ -141,6 +166,11 @@ export default function Signup() {
 						id='google'
 						name='acquisition'
 						value='google'
+						defaultChecked={
+							formState.enteredValues?.acquisition.includes(
+								'google',
+							) || false
+						}
 					/>
 					<label htmlFor='google'>Google</label>
 				</div>
@@ -151,6 +181,11 @@ export default function Signup() {
 						id='friend'
 						name='acquisition'
 						value='friend'
+						defaultChecked={
+							formState.enteredValues?.acquisition.includes(
+								'friend',
+							) || false
+						}
 					/>
 					<label htmlFor='friend'>Referred by friend</label>
 				</div>
@@ -161,6 +196,11 @@ export default function Signup() {
 						id='other'
 						name='acquisition'
 						value='other'
+						defaultChecked={
+							formState.enteredValues?.acquisition.includes(
+								'other',
+							) || false
+						}
 					/>
 					<label htmlFor='other'>Other</label>
 				</div>
@@ -172,6 +212,7 @@ export default function Signup() {
 						type='checkbox'
 						id='terms-and-conditions'
 						name='terms'
+						defaultChecked={formState.enteredValues?.terms || false}
 					/>
 					I agree to the terms and conditions
 				</label>
