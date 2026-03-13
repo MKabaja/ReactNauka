@@ -1,8 +1,14 @@
+import { useActionState } from 'react';
+import opinionAction from '../actions/opinionActions';
+
 export function NewOpinion() {
+	const [formState, formAction] = useActionState(opinionAction, {
+		errors: null,
+	});
 	return (
 		<div id='new-opinion'>
 			<h2>Share your opinion!</h2>
-			<form>
+			<form action={formAction}>
 				<div className='control-row'>
 					<p className='control'>
 						<label htmlFor='userName'>Your Name</label>
@@ -35,6 +41,20 @@ export function NewOpinion() {
 					<button type='submit'>Submit</button>
 				</p>
 			</form>
+			{formState.errors && (
+				<div className='errors'>
+					<h3>Errors:</h3>
+					<ul>
+						{Object.entries(formState.errors).map(
+							([field, error]) => (
+								<li key={field}>
+									<strong>{field}:</strong> {error}
+								</li>
+							),
+						)}
+					</ul>
+				</div>
+			)}
 		</div>
 	);
 }
