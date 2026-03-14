@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"allowJs": true, // Pozwala na pliki .js i .jsx
+		"checkJs": true, // Nie zgłasza błędów TS w plikach JS
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true, // Włącza restrykcyjne typowanie (zalecane)
+		"forceConsistentCasingInFileNames": true,
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx", // Obsługa JSX (React 18/19)
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"] // Opcjonalne: aliasy ścieżek
+		}
+	},
+	"include": ["src"],
+	"references": [{ "path": "./tsconfig.node.json" }]
+}
