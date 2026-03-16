@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Cart, CartItem } from '../types/cart';
 import { CART_STORAGE_KEY } from '../constants/cart';
-
-type CartMutationAction = (id: string, quantity: number) => void;
-type CartRemovalAction = (id: string) => void;
-type AdjustUpdateIntent = 'increaseQuantity' | 'updateQuantity';
+import {
+	CartMutationAction,
+	CartRemovalAction,
+	AdjustUpdateIntent,
+} from '../types/cart';
 
 export function useCart() {
 	const [cart, setCart] = useState<Cart>(() => retrieveCart());
@@ -37,7 +38,7 @@ export function useCart() {
 	};
 
 	const updateItem: CartMutationAction = (mealId, quantity) => {
-		if (quantity <= 0) {
+		if (quantity === undefined || quantity <= 0) {
 			removeItem(mealId);
 			return;
 		}

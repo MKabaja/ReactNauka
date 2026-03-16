@@ -75,20 +75,20 @@ Stwórz hook zarządzający koszykiem z localStorage.
 
 ### ✅ Definition of Done
 
-- [ ] Plik `src/hooks/useCart.ts` istnieje
-- [ ] Hook exportuje funkcję `useCart()`
-- [ ] Stan: `cart: CartItem[]`
-- [ ] Akcje implementowane:
-    - [ ] `addToCart(mealId: string, quantity: number): void`
-    - [ ] `removeFromCart(mealId: string): void`
-    - [ ] `updateQuantity(mealId: string, quantity: number): void`
-    - [ ] `clearCart(): void`
-- [ ] Getter: `cartCount` - suma ilości (readonly)
-- [ ] `useEffect` do sync localStorage (load na mount + save na change)
-- [ ] Brak TypeScript errors
-- [ ] Edge cases:
-    - [ ] Dodawanie istniejącego item'u → update qty
-    - [ ] Update qty ≤ 0 → remove item
+- [x] Plik `src/hooks/useCart.ts` istnieje
+- [x] Hook exportuje funkcję `useCart()`
+- [x] Stan: `cart: CartItem[]`
+- [x] Akcje implementowane:
+    - [x] `addToCart(mealId: string, quantity: number): void`
+    - [x] `removeFromCart(mealId: string): void`
+    - [x] `updateQuantity(mealId: string, quantity: number): void`
+    - [x] `clearCart(): void`
+- [x] Getter: `cartCount` - suma ilości (readonly)
+- [x] `useEffect` do sync localStorage (load na mount + save na change)
+- [x] Brak TypeScript errors
+- [x] Edge cases:
+    - [x] Dodawanie istniejącego item'u → update qty
+    - [x] Update qty ≤ 0 → remove item
 
 ### 🎯 Key Points
 
