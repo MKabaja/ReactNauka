@@ -14,11 +14,11 @@ Zdefiniować typy TypeScript dla cart system.
 
 ### ✅ Definition of Done
 
-- [ ] Plik `src/types/cart.ts` istnieje
-- [ ] `CartItem` interface: `{ id: string; quantity: number }`
-- [ ] `Cart` interface: `{ items: CartItem[] }`
-- [ ] Brak TypeScript errors
-- [ ] Typy są exportowane i możliwe do importu
+- [x] Plik `src/types/cart.ts` istnieje
+- [x] `CartItem` interface: `{ id: string; quantity: number }`
+- [x] `Cart` interface: `{ items: CartItem[] }`
+- [x] Brak TypeScript errors
+- [x] Typy są exportowane i możliwe do importu
 
 ### 📝 Co zaimplementować
 
@@ -49,9 +49,9 @@ Stworzyć constants dla cart system.
 
 ### ✅ Definition of Done
 
-- [ ] Plik `src/constants/cart.ts` istnieje
-- [ ] Stała `CART_STORAGE_KEY = 'cart'`
-- [ ] Eksportowane i testowalne
+- [x] Plik `src/constants/cart.ts` istnieje
+- [x] Stała `CART_STORAGE_KEY = 'cart'`
+- [x] Eksportowane i testowalne
 
 ### 📝 Co zaimplementować
 

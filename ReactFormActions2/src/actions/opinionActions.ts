@@ -5,6 +5,7 @@ import {
 	maxLength,
 	containsOnlyLetters,
 } from '../utils/validation/rules';
+import { OpinionDTO, postOpinion } from '../http/http';
 
 type OpinionData = {
 	userName: string;
@@ -15,14 +16,15 @@ type OpinionData = {
 type OpinionFormState = {
 	errors: Record<string, string> | null;
 	enteredValues?: OpinionData;
+	success?: boolean;
 };
 
 type OpinionAction = (
 	prevState: OpinionFormState,
 	formData: FormData,
-) => OpinionFormState;
+) => Promise<OpinionFormState>;
 
-const opinionAction: OpinionAction = (prevState, formData) => {
+const opinionAction: OpinionAction = async (prevState, formData) => {
 	const Schema = {
 		userName: [isRequired, minLength(3), containsOnlyLetters],
 		title: [isRequired, minLength(5)],
@@ -34,14 +36,26 @@ const opinionAction: OpinionAction = (prevState, formData) => {
 	if (!isValid) {
 		return { errors };
 	}
-
-	// Here you would typically send the data to a server or update your state
-	console.log('Opinion submitted:', enteredValues);
-
-	return {
-		errors: null,
-		enteredValues: enteredValues as OpinionData,
-	};
+	try {
+		await postOpinion(enteredValues as OpinionDTO);
+		return {
+			errors: null,
+			enteredValues: enteredValues as OpinionData,
+			success: true,
+		};
+	} catch (error) {
+		console.error('Error submitting opinion:', error);
+		return {
+			errors: {
+				server:
+					error instanceof Error
+						? error.message
+						: 'An unexpected error occurred while submitting your opinion.',
+			},
+			enteredValues: enteredValues as OpinionData,
+			success: false,
+		};
+	}
 };
 
 export default opinionAction;
