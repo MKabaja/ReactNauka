@@ -173,11 +173,11 @@ Wyświetl ilość artykułów w koszyku w Header.
 
 ### ✅ Definition of Done
 
-- [ ] Import: `useCartContext` z contextu
-- [ ] Use hook: `const { cartCount } = useCartContext()`
-- [ ] Button text: `Koszyk({cartCount})` zamiast hardcoded `Koszyk(0)`
-- [ ] Dynamicznie aktualizuje się
-- [ ] Brak TypeScript errors
+- [x] Import: `useCartContext` z contextu
+- [x] Use hook: `const { cartCount } = useCartContext()`
+- [x] Button text: `Koszyk({cartCount})` zamiast hardcoded `Koszyk(0)`
+- [x] Dynamicznie aktualizuje się
+- [x] Brak TypeScript errors
 
 ### 📦 Commit Message
 

@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react';
 import { Meal } from '../types/meal';
+import { useCartContext } from '../context/CartContext';
 
 type MealItemProps = ComponentPropsWithoutRef<'li'> & {
 	meal: Meal;
@@ -7,6 +8,7 @@ type MealItemProps = ComponentPropsWithoutRef<'li'> & {
 
 export default function MealItem({ meal }: MealItemProps) {
 	const { logo, name, price, description, id } = meal;
+	const { addItem } = useCartContext();
 	return (
 		<li
 			id={id}
@@ -22,7 +24,12 @@ export default function MealItem({ meal }: MealItemProps) {
 			<p className='meal-item-description'>{description}</p>
 
 			<div className='meal-item-actions'>
-				<button className='button'>Dodaj do koszyka</button>
+				<button
+					className='button'
+					onClick={() => addItem(id)}
+				>
+					Dodaj do koszyka
+				</button>
 			</div>
 		</li>
 	);
