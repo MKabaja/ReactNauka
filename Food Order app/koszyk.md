@@ -117,11 +117,11 @@ Udostępnić cart globalnie via Context API.
 
 ### ✅ Definition of Done
 
-- [ ] Plik `src/context/CartContext.tsx` istnieje
-- [ ] `CartContext` created z proper type'ami
-- [ ] `CartProvider` komponent
-- [ ] `useCartContext()` hook - safe getter (throw error jeśli brak providera)
-- [ ] Eksport: `CartProvider`, `useCartContext`
+- [x] Plik `src/context/CartContext.tsx` istnieje
+- [x] `CartContext` created z proper type'ami
+- [x] `CartProvider` komponent
+- [x] `useCartContext()` hook - safe getter (throw error jeśli brak providera)
+- [x] Eksport: `CartProvider`, `useCartContext`
 
 ### 🎯 Key Points
 
