@@ -149,11 +149,11 @@ Owinąć app w CartProvider.
 
 ### ✅ Definition of Done
 
-- [ ] `src/App.tsx` zmodyfikowany
-- [ ] Import: `{ CartProvider } from './context/CartContext'`
-- [ ] Struktura: `<CartProvider><Header /><main>...</main></CartProvider>`
-- [ ] Brak errors
-- [ ] App renderuje bez problemów
+- [x] `src/App.tsx` zmodyfikowany
+- [x] Import: `{ CartProvider } from './context/CartContext'`
+- [x] Struktura: `<CartProvider><Header /><main>...</main></CartProvider>`
+- [x] Brak errors
+- [x] App renderuje bez problemów
 
 ### 📦 Commit Message
 
