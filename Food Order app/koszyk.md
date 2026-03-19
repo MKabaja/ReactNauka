@@ -355,9 +355,9 @@ Stwórz modal wyświetlający cart items z +/- quantity oraz total.
 
 ### ✅ Definition of Done
 
-- [ ] Plik `src/components/CartModal.tsx` istnieje
-- [ ] **forwardRef + <dialog>** element
-- [ ] Wyświetla listę cart items (podobnie jak MealItem, ale edytowalne)
+- [x] Plik `src/components/CartModal.tsx` istnieje
+- [x] **forwardRef + <dialog>** element
+- [x] Wyświetla listę cart items (podobnie jak MealItem, ale edytowalne)
 - [ ] Każdy item ma: `-` button, quantity, `+` button, `X` remove
 - [ ] Pokazuje **cart total** (sum ceny \* qty)
 - [ ] Dwa buttons: "Close" (close modal), "Go to Checkout" (close + open checkout modal)
