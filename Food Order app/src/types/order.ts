@@ -18,15 +18,15 @@ import { CartItem } from './cart';
 
 export const orderAddressSchema = z.object({
 	/** Full name of the customer (min. 4 characters) */
-	name: z.string().min(4, 'Full name is required'),
+	name: z.string().trim().min(1, 'Full name is required'),
 	/** Email address of the customer (must be valid email) */
-	email: z.string().email('Invalid email address'),
+	email: z.string().trim().email('Invalid email address'),
 	/** Street address (min. 3 characters) */
-	street: z.string().min(3, 'Street is required'),
+	street: z.string().trim().min(1, 'Street is required'),
 	/** Postal code (min. 6 characters, e.g. 00-123) */
-	postalCode: z.string().min(6, 'Postal code is required'),
+	postalCode: z.string().trim().min(1, 'Postal code is required'),
 	/** City name (min. 4 characters) */
-	city: z.string().min(4, 'City is required'),
+	city: z.string().trim().min(1, 'City is required'),
 });
 
 /**
@@ -56,5 +56,5 @@ export type OrderAddress = z.infer<typeof orderAddressSchema>;
  */
 export interface Order {
 	readonly customer: OrderAddress;
-	readonly items: CartItem[];
+	readonly items: readonly CartItem[];
 }

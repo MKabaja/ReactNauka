@@ -42,6 +42,7 @@ export default function Modal({
 			dialog.removeEventListener('close', handleClose);
 		};
 	}, [onClose]);
+
 	return createPortal(
 		<dialog
 			ref={dialogRef}

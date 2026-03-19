@@ -359,11 +359,11 @@ Stwórz modal wyświetlający cart items z +/- quantity oraz total.
 - [x] **forwardRef + <dialog>** element
 - [x] Wyświetla listę cart items (podobnie jak MealItem, ale edytowalne)
 - [ ] Każdy item ma: `-` button, quantity, `+` button, `X` remove
-- [ ] Pokazuje **cart total** (sum ceny \* qty)
-- [ ] Dwa buttons: "Close" (close modal), "Go to Checkout" (close + open checkout modal)
-- [ ] Używa `.modal`, `.cart-item`, `.cart-item-actions` CSS classes
-- [ ] Brak TypeScript errors
-- [ ] Brak items → ui komunikat "Koszyk jest pusty"
+- [x] Pokazuje **cart total** (sum ceny \* qty)
+- [x] Dwa buttons: "Close" (close modal), "Go to Checkout" (close + open checkout modal)
+- [x] Używa `.modal`, `.cart-item`, `.cart-item-actions` CSS classes
+- [x] Brak TypeScript errors
+- [x] Brak items → ui komunikat "Koszyk jest pusty"
 
 ### 🎯 Key Points
 
